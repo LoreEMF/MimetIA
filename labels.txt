@@ -1,0 +1,3 @@
+0 Neutral
+1 Feliz
+2 Sorprendidao

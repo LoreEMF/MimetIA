@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MimetIA</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+<body>
+    <div id="container">
+        <h1>MimetIA 🤖</h1>
+        <video id="webcam" width="640" height="480" autoplay playsinline muted></video>
+        <button id="start-button">Iniciar Cámara</button>
+        <h2>Pose Detectada: <span id="pose">---</span></h2>
+        <h2>Confianza: <span id="score">0.00</span>%</h2>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
