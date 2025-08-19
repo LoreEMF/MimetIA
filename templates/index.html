@@ -3,18 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MimetIA</title>
-    
+    <title>MimetIA - Torneo de Poses</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-
 </head>
 <body>
-    <div id="container">
-        <h1>MimetIA 🤖</h1>
-        <video id="webcam" width="640" height="480" autoplay playsinline muted></video>
-        <button id="start-button">Iniciar Cámara</button>
-        <h2>Pose Detectada: <span id="pose">---</span></h2>
-        <h2>Confianza: <span id="score">0.00</span>%</h2>
+    <div id="setup-screen">
+        <div class="container">
+            <h1>MimetIA 🤖</h1>
+            <h2>Configuración de la Partida</h2>
+            <div id="player-inputs">
+                <input type="text" placeholder="Nombre Jugador 1" class="player-name" value="Jugador 1">
+                <input type="text" placeholder="Nombre Jugador 2" class="player-name" value="Jugador 2">
+            </div>
+            <button id="add-player-button">+ Añadir Jugador</button>
+            <button id="start-game-button">¡Empezar Partida!</button>
+        </div>
+    </div>
+
+    <div id="game-screen" style="display: none;">
+        <div class="container">
+            <h1>Objetivo: <span id="objective">---</span></h1>
+            <video id="webcam" width="640" height="480" autoplay playsinline muted></video>
+            <div id="game-info">
+                <div id="turn-info">
+                    <h2>Turno de: <span id="current-player">---</span></h2>
+                    <h3>Tiempo: <span id="timer">--</span>s</h3>
+                </div>
+                <div id="scoreboard">
+                    <h2>Puntuaciones</h2>
+                    <ul id="player-list"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="message-overlay" class="overlay" style="display: none;">
+        <div class="message-box">
+            <h2 id="message-title"></h2>
+            <p id="message-text"></p>
+            <button id="next-round-button">Siguiente Ronda</button>
+        </div>
+    </div>
+
+    <div id="turn-ready-overlay" class="overlay" style="display: none;">
+        <div class="message-box">
+            <h2>¡Prepárate, <span id="ready-player-name"></span>!</h2>
+            <p>Tu objetivo es: <strong id="ready-objective"></strong></p>
+            <button id="start-turn-button">¡Estoy listo!</button>
+        </div>
     </div>
 
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>

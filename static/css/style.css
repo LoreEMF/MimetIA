@@ -1,50 +1,92 @@
-body { 
-    font-family: sans-serif; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    background-color: #f0f0f0; 
-    margin-top: 20px; 
+/* --- Estilos para la Pantalla de Configuración --- */
+#setup-screen .container {
+    max-width: 500px;
 }
 
-#container { 
-    text-align: center; 
-    background: white; 
-    padding: 20px; 
-    border-radius: 10px; 
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+#player-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
 }
 
-video { 
-    border: 3px solid #333; 
-    border-radius: 10px; 
-    width: 640px; 
-    max-width: 100%; 
-    background-color: #000;
+.player-name {
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-h1, h2 { 
-    color: #333; 
+#add-player-button {
+    background-color: #007bff;
+    margin-right: 10px;
 }
 
-#pose { 
-    font-weight: bold; 
-    color: #dc3545; 
+#start-game-button {
+    background-color: #28a745;
+    font-weight: bold;
 }
 
-#score { 
-    font-weight: bold; 
-    color: #007bff; 
-    font-size: 1.5em; 
+/* --- Estilos para la Pantalla de Juego --- */
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 95%;
+    max-width: 800px;
+    text-align: center;
 }
 
-button { 
-    padding: 10px 20px; 
-    font-size: 1em; 
-    cursor: pointer; 
-    border-radius: 5px; 
-    border: none; 
-    background-color: #28a745; 
-    color: white; 
-    margin-top: 10px; 
+#game-info {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+    text-align: left;
+}
+
+#scoreboard ul {
+    list-style: none;
+    padding: 0;
+}
+
+#scoreboard li {
+    font-size: 1.2em;
+    padding: 5px;
+}
+
+#scoreboard .active-player {
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* --- Estilos para el Overlay de Mensajes --- */
+#message-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#message-box {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+#message-title {
+    margin-top: 0;
+}
+
+#next-round-button {
+    background-color: #007bff;
+    margin-top: 15px;
 }
