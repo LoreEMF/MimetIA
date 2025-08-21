@@ -17,7 +17,7 @@ class Game:
     def __init__(self):
         self.players = []
         self.is_active = False
-        # NUEVOS ESTADOS: WAITING, READY_FOR_NEXT_TURN, PLAYING, ROUND_OVER, GAME_OVER
+        # ESTADOS: WAITING, READY_FOR_NEXT_TURN, PLAYING, ROUND_OVER, GAME_OVER
         self.state = "WAITING"
         self.current_player_index = 0
         self.current_objective = ""
@@ -42,7 +42,6 @@ class Game:
         self.state = "READY_FOR_NEXT_TURN" 
         print(f"--- Nueva Ronda --- Objetivo: {self.current_objective}. Jugadores: {[p.name for p in self.players]}")
 
-    # ¡NUEVA FUNCIÓN!
     def start_turn(self):
         """ Inicia el turno del jugador actual cuando el frontend lo pide. """
         if self.state == "READY_FOR_NEXT_TURN":
@@ -130,7 +129,6 @@ def next_round():
         game.start_new_round()
     return jsonify(game.get_state())
 
-# ¡NUEVA RUTA!
 @app.route('/game/start_turn', methods=['POST'])
 def start_turn_route():
     game.start_turn()

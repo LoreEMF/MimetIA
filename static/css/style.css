@@ -1,92 +1,182 @@
-/* --- Estilos para la Pantalla de Configuración --- */
-#setup-screen .container {
-    max-width: 500px;
+/* ====== Google look & feel (sin animaciones) ====== */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+:root{
+  /* Colores Google */
+  --g-blue:   #4285f4;
+  --g-green:  #34a853;
+  --g-yellow: #f9ab00;
+  --g-red:    #ea4335;
+
+  /* Halftones (suaves) */
+  --g-blue-ht:   #57caff;
+  --g-green-ht:  #5cdb64;
+  --g-yellow-ht: #ffd427;
+  --g-red-ht:    #ff7daf;
+
+  /* Tokens UI */
+  --text:#202124;
+  --muted:#5f6368;
+  --radius:16px;
+  --surface:rgba(255,255,255,0.92);
+  --shadow:0 10px 24px rgba(0,0,0,.12);
+
+  /* Tamaño del patrón de fondo más visible */
+  --bg-size: clamp(180px, 14vw, 280px);
 }
 
-#player-inputs {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 15px;
+html, body{ height:100%; }
+body{
+  margin:0;
+  font-family:'Roboto', system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  color:var(--text);
+
+  /* Fondo patrón */
+  background-image:url('../img/pattern-gdg.png');
+  background-repeat:repeat;
+  background-size: var(--bg-size) auto;
+  background-attachment:fixed;
+  background-color:#f8f9fa;
 }
 
-.player-name {
-    padding: 10px;
-    font-size: 1em;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+/* ====== Botones (sin animación/transition) ====== */
+button{
+  appearance:none;
+  position:relative;
+  border:0;
+  border-radius:12px;
+  padding:10px 14px;
+  font-weight:600;
+  color:#fff;
+  cursor:pointer;
+  background: var(--btn-bg, var(--g-blue));
+  box-shadow: 0 6px 14px rgba(0,0,0,.12);
+}
+button:focus-visible{
+  outline:none;
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--btn-bg) 25%, #ffffff 75%), 0 6px 14px rgba(0,0,0,.12);
+}
+/* Colores mapeados a tus IDs */
+#add-player-button{ --btn-bg: var(--g-blue); margin-right:10px; }
+#start-game-button{ --btn-bg: var(--g-green); }
+#next-round-button, #start-turn-button{ --btn-bg: var(--g-blue); }
+
+/* ====== Tarjetas y centrado ====== */
+.container{
+  background: var(--surface);
+  backdrop-filter: blur(2px);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-align:left;
+  padding:24px;
+  margin:32px auto;
 }
 
-#add-player-button {
-    background-color: #007bff;
-    margin-right: 10px;
+/* Centrado de pantallas */
+#setup-screen, #game-screen{
+  min-height:100svh;
+  display:grid;
+  place-items:center;
+  padding:24px;
 }
 
-#start-game-button {
-    background-color: #28a745;
-    font-weight: bold;
+/* Tamaño específico por vista */
+#setup-screen .container{ width: min(92vw, 560px); }
+#game-screen .container{ width: min(94vw, 1100px); }
+
+/* ====== Tipografía ====== */
+h1,h2,h3{ margin:0 0 12px; }
+h1{ font-size:clamp(24px, 3vw, 32px); font-weight:700; }
+h2{ font-size:clamp(18px, 2.2vw, 22px); font-weight:600; color:var(--muted); }
+
+/* ====== Setup: inputs (sin animación) ====== */
+#player-inputs{
+  display:flex; flex-direction:column; gap:12px; margin:16px 0 12px;
+}
+.player-name{
+  padding:12px;
+  font-size:1rem;
+  border:1px solid #e6e8eb;
+  border-radius:10px;
+  outline:none;
+}
+.player-name:focus{
+  border-color: var(--g-blue);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--g-blue) 25%, #ffffff 75%);
 }
 
-/* --- Estilos para la Pantalla de Juego --- */
-.container {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    width: 95%;
-    max-width: 800px;
-    text-align: center;
+/* ====== Vista de juego: layout limpio ====== */
+#game-screen .container{
+  display:grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-areas:
+    "title title"
+    "video side";
+  gap:24px;
+  align-items:start;
 }
 
-#game-info {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 15px;
-    text-align: left;
+#game-screen h1{ grid-area:title; margin-bottom:4px; }
+
+/* Vídeo */
+#webcam{
+  grid-area:video;
+  width:100%; height:auto;
+  background:#000;
+  border-radius:var(--radius);
+  box-shadow: var(--shadow);
+  aspect-ratio: 4 / 3;
 }
 
-#scoreboard ul {
-    list-style: none;
-    padding: 0;
+/* Panel lateral (turno + marcador) */
+#game-info{
+  grid-area:side;
+  display:grid; gap:16px;
 }
-
-#scoreboard li {
-    font-size: 1.2em;
-    padding: 5px;
+#turn-info, #scoreboard{
+  background:#fff;
+  border-radius:14px;
+  padding:16px;
+  box-shadow: 0 6px 16px rgba(0,0,0,.08);
 }
+#turn-info h2, #scoreboard h2{ color:#202124; margin-bottom:8px; }
+#turn-info h3{ margin:6px 0 0; color:var(--muted); font-weight:500; }
 
-#scoreboard .active-player {
-    font-weight: bold;
-    color: #007bff;
+/* Marcador */
+#scoreboard ul, #player-list{ list-style:none; padding:0; margin:8px 0 0; }
+#scoreboard li{
+  display:flex; justify-content:space-between; align-items:center;
+  font-size:1rem; padding:10px 0; border-bottom:1px solid #f0f2f5;
 }
+#scoreboard li:last-child{ border-bottom:none; }
+#scoreboard .active-player{ font-weight:700; color:var(--g-blue); }
 
-/* --- Estilos para el Overlay de Mensajes --- */
-#message-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+/* ====== Overlays ====== */
+.overlay{
+  position:fixed; inset:0;
+  background:rgba(32,33,36,.65);
+  display:flex; align-items:center; justify-content:center;
+  padding:20px; z-index:1000;
 }
-
-#message-box {
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+.message-box{
+  background:#fff;
+  width:min(560px, 92vw);
+  padding:24px 28px;
+  border-radius: var(--radius);
+  text-align:center;
+  box-shadow: var(--shadow);
 }
+.message-box h2{ margin-top:0; }
+#next-round-button, #start-turn-button{ --btn-bg: var(--g-blue); margin-top:14px; }
 
-#message-title {
-    margin-top: 0;
-}
-
-#next-round-button {
-    background-color: #007bff;
-    margin-top: 15px;
+/* ====== Responsive ====== */
+@media (max-width: 900px){
+  #game-screen .container{
+    grid-template-columns:1fr;
+    grid-template-areas:
+      "title"
+      "video"
+      "side";
+  }
+  .container{ width:min(94vw, 760px); }
 }
