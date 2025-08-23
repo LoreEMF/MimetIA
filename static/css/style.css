@@ -180,3 +180,9 @@ h2{ font-size:clamp(18px, 2.2vw, 22px); font-weight:600; color:var(--muted); }
   }
   .container{ width:min(94vw, 760px); }
 }
+
+#scoreboard li.eliminated {
+    text-decoration: line-through;
+    opacity: 0.5;
+    color: var(--g-red);
+}
